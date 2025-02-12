@@ -16,11 +16,16 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
-from django.urls import include
+from django.urls import path, include
 from rango import views
+
 urlpatterns = [
-path('', views.index, name='index'),
-path('rango/', include('rango.urls')),
-# The above maps any URLs starting with rango/ to be handled by rango.
-path('admin/', admin.site.urls),] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('', views.index, name='index'),  # Home page
+    path('rango/', include('rango.urls')),  # Maps URLs starting with rango/
+    path('admin/', admin.site.urls),  # Django admin panel
+]
+
+# ✅ Serve media files only in development (DEBUG=True)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
