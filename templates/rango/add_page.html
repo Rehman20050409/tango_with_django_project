@@ -1,0 +1,13 @@
+{% extends "rango/base.html" %}
+
+{% block content %}
+<h1>Add a Page to {{ category.name }}</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Page</button>
+</form>
+
+<p><a href="{% url 'rango:show_category' category.name %}">⬅ Back to {{ category.name }}</a></p>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "rango/base.html" %}
+
+{% block content %}
+<h1>Welcome to Rango!</h1>
+
+<h2>Top Categories:</h2>
+
+{% if categories %}
+    <ul>
+        {% for category in categories %}
+            <li>
+                <a href="{% url 'rango:show_category' category.name %}">
+                    {{ category.name }}
+                </a> ({{ category.likes }} Likes)
+                
+                <a href="{% url 'rango:add_page' category.name %}" style="margin-left: 10px;">➕ Add Page</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No categories available. <a href="{% url 'rango:add_category' %}">Add one now</a>!</p>
+{% endif %}
+
+<!-- ✅ Display Visit Counter -->
+<p>You have visited this page {{ visits }} times.</p>
+
+{% endblock %}

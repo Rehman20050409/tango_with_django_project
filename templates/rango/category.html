@@ -1,0 +1,19 @@
+{% extends "rango/base.html" %}
+
+{% block content %}
+<h1>{{ category.name }}</h1>
+<p>Likes: {{ category.likes }}</p>
+<p>Views: {{ category.views }}</p>
+
+<h2>Pages in this category:</h2>
+<ul>
+    {% for page in pages %}
+        <li><a href="{{ page.url }}" target="_blank">{{ page.title }}</a></li>
+    {% empty %}
+        <p>No pages in this category yet.</p>
+    {% endfor %}
+</ul>
+
+<p><a href="{% url 'rango:add_page' category.name %}">➕ Add a Page</a></p>
+<p><a href="{% url 'rango:index' %}">🏠 Back to Home</a></p>
+{% endblock %}
